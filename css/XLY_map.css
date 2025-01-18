@@ -1,0 +1,644 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#XLY_nav {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.XLY_nav_title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#XLY_map {
+    height: 100%;
+    width: 100%;
+    flex: 1;
+}
+
+.XLY_pilot_icon {
+    background: none;
+}
+
+.XLY_pilot_icon img {
+    width: 32px;
+    height: 32px;
+    transform-origin: center center;
+}
+
+.XLY_sidebar {
+    position: absolute;
+    left: -400px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 90vh;
+    max-height: 900px;
+    margin: 20px 0;
+    background: rgba(51, 51, 51, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+    transition: left 0.3s ease;
+    z-index: 2000;
+    border-radius: 0 15px 15px 0;
+}
+
+.XLY_sidebar.active {
+    left: 0;
+}
+
+.XLY_sidebar_content {
+    padding: 80px 20px 20px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    color: white;
+}
+
+.XLY_sidebar_header {
+    background: #333;
+    padding: 15px 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    box-sizing: border-box;
+    border-radius: 0 15px 0 0;
+    z-index: 2001;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#XLY_sidebar_close {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+#XLY_sidebar_close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.XLY_info_item {
+    background: rgba(255, 255, 255, 0.3);
+    margin-bottom: 12px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(200, 220, 255, 0.3);
+}
+
+.XLY_info_label {
+    font-weight: bold;
+    color: #4a5568;
+    margin-right: 8px;
+}
+
+.XLY_route_info {
+    background: rgba(255, 255, 255, 0.3);
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(200, 220, 255, 0.3);
+}
+
+.XLY_route_airports {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2d3748;
+}
+
+.XLY_route_icon {
+    margin: 0 20px;
+    font-size: 24px;
+    transform: rotate(0deg);
+    display: inline-block;
+}
+
+.XLY_departure, .XLY_arrival {
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.XLY_flight_header {
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.XLY_route_label {
+    display: flex;
+    justify-content: space-around;
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.XLY_route_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+}
+
+.XLY_route_names {
+    display: flex;
+    justify-content: space-around;
+    color: #666;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.XLY_flight_info {
+    display: grid;
+    gap: 10px;
+}
+
+.info_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.info_cell {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.info_icon {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.info_value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2d4374;
+}
+
+.info_label {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+#XLY_sidebar_title {
+    color: white;
+    font-size: 24px;
+}
+
+.route_value {
+    font-size: 14px !important;
+    word-break: break-word;
+    line-height: 1.2;
+    max-height: 3.6em;
+    overflow: auto;
+}
+
+.route_section {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.route_header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.route_icon {
+    font-size: 16px;
+}
+
+.route_label {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.route_value {
+    font-size: 14px;
+    color: #2d4374;
+    line-height: 1.4;
+    padding: 4px 0;
+}
+
+.XLY_flight_info {
+    display: grid;
+    gap: 12px;
+    margin: 15px 0;
+}
+
+.info_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.info_cell {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.info_icon {
+    font-size: 18px;
+    color: #666;
+}
+
+.info_value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d4374;
+}
+
+.info_label {
+    font-size: 12px;
+    color: #666;
+}
+
+.XLY_flight_header {
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.XLY_route_label {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.XLY_route_label .label {
+    width: 80px;
+    text-align: center;
+}
+
+.XLY_route_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+}
+
+.XLY_departure, .XLY_arrival {
+    width: 80px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.XLY_route_icon {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    flex-grow: 1;
+    text-align: center;
+}
+
+.XLY_sidebar_content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.XLY_sidebar_content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.XLY_sidebar_content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+.XLY_sidebar_content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.route_header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.XLY_departure, .XLY_arrival, .info_value {
+    color: white;
+}
+
+.XLY_route_label .label, .info_label, .route_label, .route_icon {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.route_value {
+    color: white;
+}
+
+.info_icon, .XLY_route_icon {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.XLY_flight_header, .info_cell, .route_section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.XLY_flight_header {
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.XLY_route_label {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.XLY_route_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+}
+
+.XLY_departure, .XLY_arrival {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.XLY_route_icon {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.info_cell {
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.info_icon {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.info_value {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+}
+
+.info_label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.route_section {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.route_header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 8px;
+}
+
+.route_icon {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.route_label {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.route_value {
+    font-size: 14px;
+    color: white;
+    line-height: 1.4;
+    padding: 4px 0;
+}
+
+.info_row.full_width {
+    display: flex;
+    justify-content: center;
+}
+
+.info_row.full_width .info_cell {
+    width: 200px;
+}
+
+.XLY_utc_time {
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.XLY_nav_right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.XLY_online_btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.XLY_online_btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.XLY_online_sidebar {
+    position: absolute;
+    right: -300px;
+    top: 50px;
+    width: 300px;
+    height: calc(100% - 50px);
+    background: rgba(51, 51, 51, 0.85);
+    backdrop-filter: blur(10px);
+    transition: right 0.3s ease;
+    z-index: 1999;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.XLY_online_sidebar.active {
+    right: 0;
+}
+
+.XLY_online_header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.XLY_online_tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.XLY_tab {
+    padding: 5px 10px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.XLY_tab.active {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.XLY_list_header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.XLY_list_item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px 15px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.XLY_list_item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#XLY_online_close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.XLY_tab[data-tab="atc"] ~ .XLY_list_header,
+.XLY_tab[data-tab="atc"].active ~ .XLY_list_header {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 10px 30px;
+}
+
+.XLY_tab[data-tab="atc"] ~ .XLY_list_item,
+.XLY_tab[data-tab="atc"].active ~ .XLY_list_item {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 10px 30px;
+}
+
+.XLY_list_item .list_col {
+    text-align: center;
+}
+
+.XLY_list_header, .XLY_list_item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px 15px;
+}
+
+.XLY_online_list[data-active-tab="atc"] .XLY_list_header,
+.XLY_online_list[data-active-tab="atc"] .XLY_list_item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 10px 30px;
+}
+
+.XLY_list_header {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.XLY_list_header .list_col,
+.XLY_list_item .list_col {
+    text-align: center;
+}
+
+.XLY_list_item {
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.XLY_list_item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.XLY_list_item .list_col {
+    text-align: center;
+} 

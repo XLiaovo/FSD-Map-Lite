@@ -1,0 +1,63 @@
+<!--
+ * FSD Map Lite
+ * 
+ * @author XLiaovo
+ * @link https://github.com/XLiaovo/
+ * @license GPL-3.0
+ * 
+ * Copyright (c) 2025 XLiaovo
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>实时地图</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <link rel="stylesheet" href="css/XLY_map.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+</head>
+<body>
+    <nav id="XLY_nav">
+        <div class="XLY_nav_title">实时预览地图</div>
+        <div class="XLY_nav_right">
+            <div id="XLY_online_list" class="XLY_online_btn">在线列表</div>
+            <div id="XLY_utc_time" class="XLY_utc_time">--:--:--UTC</div>
+        </div>
+    </nav>
+    
+    <div id="XLY_online_sidebar" class="XLY_online_sidebar">
+        <div class="XLY_online_content">
+            <div class="XLY_online_header">
+                <div class="XLY_online_tabs">
+                    <div class="XLY_tab active" data-tab="pilots">机组(0)</div>
+                    <div class="XLY_tab" data-tab="atc">管制(0)</div>
+                </div>
+                <button id="XLY_online_close">&times;</button>
+            </div>
+            <div class="XLY_online_list">
+                <div id="XLY_list_content"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="XLY_sidebar" class="XLY_sidebar">
+        <div class="XLY_sidebar_content">
+            <div class="XLY_sidebar_header">
+                <h2 id="XLY_sidebar_title">详细信息</h2>
+                <button id="XLY_sidebar_close">&times;</button>
+            </div>
+            <div id="XLY_sidebar_info" class="XLY_sidebar_info"></div>
+        </div>
+    </div>
+    
+    <div id="XLY_map"></div>
+
+    <script src="js/XLY_data.js"></script>
+    <script src="js/XLY_map.js"></script>
+</body>
+</html> 
